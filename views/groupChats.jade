@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    //Show Groups
+    a(href='/users/creategroups', id="addGroupsButton", style='float:right; margin-right: 2px;') Create a Group
+    form(method='post', action='/users/creategroups')
+    if groups1
+        each group in groups1
+            form(method='post', action='/users/joinGroup')
+                .panel.panel-default(id="groups")
+                  .panel-heading(style='background:'+mood+'; color: #fff;')
+                    .form-group
+                    input(type='hidden' name='group' value='#{group._id}')
+                    input(type='hidden' name='user' value='#{user.username}')
+                    img(src='/images/test.jpg', style='width:50px; height=50px; border-radius: 50%;')
+                    | &nbsp; #{group.group.title}
+                    button(type='submit', style='float: right; margin-top: 2vh; color: #000;') Join
+                  .panel-body
+                    |#{group.group.description}
+                    

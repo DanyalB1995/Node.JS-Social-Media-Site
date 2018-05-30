@@ -1,0 +1,103 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Untitled
+    link(rel='stylesheet', href='/assets/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/assets/css/Article-List.css')
+    script(src='/assets/js/jquery.min.js')
+    script(src='/assets/bootstrap/js/bootstrap.min.js')
+
+
+  body
+      form(method='post', action='/users/moods')
+        .article-list
+          .container
+            .intro
+              h2.text-center Mood Setter
+              p.text-center Choose your settings for each mood including site theme and spotify playlists
+            .row.articles
+              .col-sm-6.col-md-4.item
+                a(href='#')
+                  img.img-fluid(src='/assets/img/happy.jpg')
+                h3.name Happy
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Theme:
+                  input(style='margin-top: 2%;', name="happyColour", type='color')
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Playlist:
+                  input(type='text', style='width:55%; height:2vh; margin-top: 3%;', name="happySpotify")
+              .col-sm-6.col-md-4.item
+                img.img-fluid(src='/assets/img/meh.jpg')
+                a(href='#')
+                h3.name Meh
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Theme:
+                  input(style='margin-top: 2%;', type='color', name="mehColour")
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Playlist:
+                  input(type='text', style='width:55%; height:2vh; margin-top: 3%;', name="mehSpotify")
+              .col-sm-6.col-md-4.item
+                a(href='#')
+                  img.img-fluid(src='/assets/img/sad.jpg')
+                h3.name Sad
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Theme:
+                  input(style='margin-top: 2%;', type='color', name="sadColour")
+                .row(style="margin-left:.5%;")
+                  label.col-form-label(style="margin-right:2%;") Change Playlist:
+                  input(type='text', style='width:55%; height:2vh; margin-top: 3%;', name="sadSpotify")
+
+
+            label.col-form-label(style="margin-right:2%;") Change Tag:
+            input(type='text', style='width:20%; height:2vh; margin-top: 3%;', name="changeTag")
+            br
+            br
+            button.btn.btn-default(type='submit', name='submit') Post
+            a(href="/users/happyplace" style="margin-left: 10px;") no changes
+
+//    
+        .page-header
+            h1(style="text-align: center;") Set Moods
+        .container(style="margin-top: 5%;")
+          .row
+            .col-xs-4 
+                #happy
+                  img(src='/images/happy1.png', alt='Smiley face', height='250vh', width='250vh')
+             .col-xs-8
+              .row
+                .col-md-4.col-md-push-8
+                    #sad
+                      img(src='/images/sad1.png', alt='Smiley face', height='250vh', width='250vh', )
+                .col-md-8.col-md-pull-3
+                    #mehColourColour
+                      img(src='/images/meh1.png', alt='Smiley face', height='250vh', width='250vh')
+            .container(style="margin-left: 9%;")
+              .row
+                .col-xs-4 
+                    #happyColour
+                      input(type='color', name='happyColour', value='#ff0000', style="margin-top: 5%;")
+                 .col-xs-8
+                  .row
+                    .col-md-4.col-md-push-8
+                        #sadColour
+                          input(type='color', name='sadColour', value='#ff0000', style="margin-top: 7%;")
+                    .col-md-8.col-md-pull-3
+                        #mehColour
+                          input(type='color', name='mehColour', value='#ff0000', style="margin-top: 5%;")
+           .container
+              .row
+                .col-xs-4 
+                    #happyColour
+                      input(type='text', name='happySpotify')
+                 .col-xs-8
+                  .row
+                    .col-md-4.col-md-push-8
+                        #sadColour
+                          input(type='text', name='sadSpotify')
+                    .col-md-8.col-md-pull-3
+                        #mehColour
+                          input(type='text', name='mehSpotify')
+                          
+            button.btn.btn-default(type='submit', name='submit') Post

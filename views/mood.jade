@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Untitled
+    link(rel='stylesheet', href='assets/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='assets/css/Article-List.css')
+    link(rel='stylesheet', href='assets/css/styles.css')
+  body
+    .article-list
+      .container
+        .intro
+          h2.text-center Mood Setter
+          p.text-center Choose your settings for each mood including site theme and spotify playlists
+        .row.articles
+          .col-sm-6.col-md-4.item
+            a(href='#')
+              img.img-fluid(src='assets/img/happy.jpg')
+            h3.name Happy
+            .row
+              label.col-form-label Change Theme
+              input(style='margin-top: 2%;', type='color')
+            .row
+              label.col-form-label Change Playlist
+              input(type='text', style='width:55%; height:2vh; margin-top: 3%;')
+          .col-sm-6.col-md-4.item
+            img.img-fluid(src='assets/img/meh.jpg')
+            a(href='#')
+            h3.name Meh
+            .row
+              label.col-form-label Change Theme
+              input(style='margin-top: 2%;', type='color')
+            .row
+              label.col-form-label Change Playlist
+              input(type='text', style='width:55%; height:2vh; margin-top: 3%;')
+          .col-sm-6.col-md-4.item
+            a(href='#')
+              img.img-fluid(src='assets/img/sad.jpg')
+            h3.name Sad
+            .row
+              label.col-form-label Change Theme
+              input(style='margin-top: 2%;', type='color')
+            .row
+              label.col-form-label Change Playlist
+              input(type='text', style='width:55%; height:2vh; margin-top: 3%;')
+    script(src='assets/js/jquery.min.js')
+    script(src='assets/bootstrap/js/bootstrap.min.js')

@@ -1,0 +1,125 @@
+doctype html
+html(lang='en')
+  head
+    meta(name='viewport', content='user-scalable=no, width=device-width')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/styles.css')
+    link(rel='stylesheet', href='/stylesheets/colour.css')
+    title My Happy Place
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', crossorigin='anonymous')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    if user
+        script(src='/javascripts/start.js')
+  body
+    //Nav Bar
+    if user
+        .navbar.navbar-default(role='navigation' ,style="background:"+mood+";")
+            .navbar-header
+              button.navbar-toggle(type='button',data-toggle='collapse',data-target='.navbar-collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#')
+                img.d-inline-block.align-top(src='/images/happy.png', width='30', height='30', alt='')
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav.navbar-right()
+                if !user
+                    li(class=(title=='Register' ? 'active' : ''))
+                        a(href='/users/register') Register
+                    li(class=(title=='Login' ? 'active' : ''))
+                        a(href='/users/login') Login
+                if user
+                    li
+                      a(href='/users/happyplace', style="color: #fff;") Home
+                    li
+                      a(href='#messages', data-toggle='modal', data-target='#messages', style="color: #fff;") Messages
+                    li.dropdown
+                      a.dropdown-toggle(data-toggle='dropdown', href='#', style="color: #fff;") Mood 
+                        span.caret
+                      ul.dropdown-menu
+                        li
+                            a(href='#' id="happy") Happy
+                        li
+                            a(href='#' id="meh") Meh
+                        li
+                            a(href='#' id="sad") Sad
+                        li
+                            a(href='/users/moods') Mood Settings
+                    li
+                      a.nav-link(href='/users/groups', style="color: #fff;") Groups
+                    li
+                      a(href='/users/logout', style="color: #fff;") Logout
+
+    if !user
+        .navbar.navbar-default(role='navigation')
+            .navbar-header
+              button.navbar-toggle(type='button',data-toggle='collapse',data-target='.navbar-collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#')
+                img.d-inline-block.align-top(src='/images/happy.png', width='30', height='30', alt='')
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav.navbar-right()
+                if !user
+                    li(class=(title=='Register' ? 'active' : ''))
+                        a(href='/users/register') Register
+                    li(class=(title=='Login' ? 'active' : ''))
+                        a(href='/users/login') Login
+                if user
+                    li
+                      a(href='/users/happyplace', style="color: #fff;") Home
+                    li
+                      a(href='#messages', data-toggle='modal', data-target='#messages', style="color: #fff;") Messages
+                    li
+                      a.nav-link(href='/users/groups', style="color: #fff;") Groups
+                    li
+                      a(href='/users/logout', style="color: #fff;") Logout
+        if !user
+            block content
+            
+    if user
+        block content
+        //Group Chats
+        #messages.modal.fade(role='dialog', style='height: auto;')
+          .modal-dialog.modal-md
+            .modal-content
+              .modal-header(style='background:'+mood+';')
+                h4.modal-title(style='padding-top: 10px; color: #fff;') Messages
+                button.close(type='button', data-dismiss='modal') ×
+              .panel.panel-default(style='width: 100%; margin-bottom: 0;')
+              if groups
+                each group in groups
+                    .panel-heading(id=group._id)
+                      img(src='/images/test.jpg', style='width:50px; height=50px; border-radius: 50%;')
+                      | &nbsp; #{group.group.title}
+                      
+        //Message Box     
+        #messageBox.modal.fade(role='dialog')
+            .modal-dialog.modal-md
+                .modal-content
+                  .modal-header(style='background:'+mood+';')
+                    h4.modal-title(style='padding-top: 10px colour: white;') Messages
+                    button.close(type='button', id="close", data-dismiss='modal') ×
+                  .modal-body
+                    ul#mes(style="list-style-type: none;")
+                  form(action='' id="sendMessage")
+                      .modal-footer(style='background:'+mood+';')
+                        input(type='text', id="m", style='width: 100%; float: left;')
+                        br
+                        input(type='hidden', id="send", value="default")
+                        input(type='hidden', id="us", value=user.username)
+                        br
+                        button.btn.btn-default(type='submit') send
+        
+        
+        form(method='post', action='/users/changeMood', id="happy1")
+                input(type='hidden', name="mood1", value="happy")
+
+        form(method='post', id="meh1", action='/users/changeMood')
+                input(type='hidden', name="mood1", value="meh")
+            
+        form(method='post', id="sad1", action='/users/changeMood')
+                input(type='hidden', name="mood1", value="sad")

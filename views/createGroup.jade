@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h2.page-header Create a Group
+    p Please create group using the form below
+    if errorsGroups
+        each error, i in errorsGroups
+            div.alert.alert-danger #{error.msg}
+    form(method='post', action='/users/creategroups')
+        .form-group
+        label Group Name
+        input.form-control(name='groupName', type='text', placeholder='Enter Group Name')
+        .form-group
+        label Description
+        input.form-control(name='description', type='text', placeholder='Enter Description')
+        br
+        input.btn.btn-primary(type='submit', name='submit', value='Create')
+    

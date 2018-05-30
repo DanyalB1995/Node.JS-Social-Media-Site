@@ -1,0 +1,68 @@
+extends layout
+
+block content  
+    //Show Notes
+    script.
+      window.onload = function() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+              var tweets = JSON.parse(xhttp.responseText);
+              var tweetstring = "";
+              for (var i =0; i< tweets.length ; i++)
+              {
+                  tweetstring += "<div class='panel panel-default' style='float: right; width: 60%;  margin-right:23vh;'>"; 
+                  tweetstring += "<div class='panel-heading' style ='background:#{mood}; color:#fff;'><img src='"+ tweets[i].pic +"' style='width:50px; height=50px; border-radius: 50%;'>&nbsp;" + tweets[i].name + "</div>"; 
+                  tweetstring += "<div class='panel-body'>"  + tweets[i].text + "</div>"
+                  tweetstring += "</div>";
+              }
+              document.getElementById("twitter").innerHTML = tweetstring;
+          }
+          };
+          xhttp.open("GET", "http://localhost:1337", true);
+          xhttp.send();
+      }
+      
+    #accordion.col-md-4(class = "notes", role='tablist', aria-multiselectable='true',)
+        if notes
+            each note in notes
+              .panel.panel-default
+                .panel-heading(id='heading'+note.id,role='tab', style="background:"+mood+";")
+                    h5.mb-0
+                    a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapse'+note.id, aria-expanded='false', aria-controls='collapse'+note.id, style="color: #fff;")
+                        | #{note.note.title}
+                .collapse(id='collapse'+note.id, role='tabpanel', aria-labelledby='heading'+note.id)
+                    .card-block
+                    | #{note.note.body}
+        a(href='#', style='padding-left: 5px;', data-toggle='modal', data-target='#myModal') +note
+        br
+        br
+        .spotify
+            iframe(id="spotify",style='height:30vh;' src=spotify, frameborder='0')
+                        
+    //Add note
+    form(method='post', action='/users/notes')
+        #myModal.modal.fade(role='dialog')
+          .modal-dialog.modal-sm
+            .modal-content
+              .modal-header
+                h4.modal-title(style='padding-top: 10px;') Add Note
+                button.close(type='button', data-dismiss='modal') ×
+              .modal-body
+              .form-group
+              input(type='text', name='noteTitle', style='width: 100%;', value='Note title....')
+              br
+              br
+              .form-group
+              textarea(rows='4', name='noteBody',style='width:100%;') Type note here.....
+              .modal-footer
+              .form-group
+              button.btn.btn-default(type='submit', name='submit') Post
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+    
+    //Show Tweets
+    aside#twitter
+    
+    
+

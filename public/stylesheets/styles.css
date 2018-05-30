@@ -1,0 +1,75 @@
+.notes{
+    width:20%; 
+    margin-left: 0;
+}
+#tweets{
+    float: right; 
+    width: 60%; 
+    margin-right:23vh;
+
+}
+#groups{
+    margin-left:25%; 
+    width: 50%;
+}
+
+#spotify{
+     width:100%;
+}
+
+@media only screen and (max-width : 500px) {
+    .notes{
+        width: 100%; 
+        margin-bottom: 10%;
+    }
+    
+    #twitter{
+        display: inline-block;
+
+    }
+    #tweets{
+        width:100%;
+        margin-right:0;
+    }
+    #groups{
+        margin-left: 0;
+        margin-top: 10%;
+        margin-bottom: 0;
+        width: 100%;
+        
+    } 
+    #spotify{
+        width:100%;
+        margin-bottom: 20%;
+    }
+
+    
+}
+
+/*@media only screen and (min-width: 501px) and (max-width : 1024px) {
+   .notes{
+        width:20%; 
+        margin-left: 0;
+    }
+    
+    #tweets{
+        float: right; 
+        width: 60%; 
+        margin-right:10vh;
+    }
+    
+    #groups{
+        margin-left: 0;
+        margin-top: 10%;
+        margin-bottom: 0;
+        width: 100%;
+        
+    } 
+    
+    #addGroupsButton{
+    
+    }
+    
+}*/
+
+

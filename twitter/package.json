@@ -1,0 +1,9 @@
+{
+  "name": "nodedchack",
+  "version": "1.0.0",
+  "dependencies": {
+    "mongodb": "*",
+    "mongoose": "^5.0.12",
+    "twitter": "^1.7.1"
+  }
+}
